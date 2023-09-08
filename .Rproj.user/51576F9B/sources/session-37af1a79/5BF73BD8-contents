@@ -1,0 +1,16 @@
+name: "Antony R Training"
+title: "R Training"
+description: |
+  This is part of the R Training provided by the CDS unit
+output_dir: "docs"
+navbar:
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Master Project"
+      menu:
+        - text: "About"
+          href: MasterProject.html
+        - text: "Results"
+          href: results.html
+output: distill::distill_article
