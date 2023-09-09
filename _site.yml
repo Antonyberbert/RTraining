@@ -13,4 +13,6 @@ navbar:
           href: MasterProject.html
         - text: "Results"
           href: results.html
-output: distill::distill_article
+output:
+  distill::distill_article:
+    toc: true

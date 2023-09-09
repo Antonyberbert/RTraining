@@ -1,5 +1,43 @@
 ---
-title: "results"
+title: "Results"
 output: distill::distill_article
 ---
 #Results
+```{r, fig.width = 12, fig.height= 10, echo=FALSE}
+
+library(ggplot2)
+library(tidyverse)
+library(dplyr)
+#Final Categories from Excel
+final_no_df <- data.frame(Category_D = c("Wirtschaftliche Gründe", "Zu extreme Massnahmen / zu breites Gesetz",
+                                         "Schweiz kann wenig bewirken", "Ungerechtes Gesetz", "Gegen Steuer",
+                                         "Misstrauen gegenüber Staat", "Gegen Umverteilung",
+                                         "Gegen Befürworter", "Klimaerwärmung kein Problem","Empfehlung"),
+                          Category_E = c("Economical Reasons", "Policy too extreme / too broad",
+                                         "Switzerland has little impact", "Unfair Policy", "Against Tax",
+                                         "Mistrust toward state", "Against Redistribution",
+                                         "Against Advocates", "Climate Change is not a threat","Recommendation"),
+                          Frequency = c(306,165,162,159,93,41,30,14,11,5))
+
+#Order decreasingly
+ordered_final_df <- final_no_df
+ordered_final_df$Category_E <- factor(ordered_final_df$Category_E,
+                           levels = ordered_final_df$Category_E[order(ordered_final_df$Frequency, decreasing = T)])
+
+reason_against <- ggplot(ordered_final_df,aes(x=Category_E, y=Frequency, fill=Category_E))+
+  geom_bar(stat="identity", show.legend = F)+
+  geom_text(aes(label=Frequency), position=position_dodge(width=0.9),vjust=-0.25)+
+  labs(x="Reason",y="Frequency")+
+  theme_classic()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 14),
+    axis.text.y = element_text(size = 16),
+    axis.title = element_text(size = 16),
+    plot.title = element_text(size = 18, hjust = 0.5)
+  )+
+  ggtitle("Reasons for being against the Co2-Gesetz")
+
+print(reason_against)
+```
+This bar chart illustrates the primary reasons people voted against the Co2-Gesetz (Carbon Dioxide Law) in Switzerland. The categories on the x-axis represent various reasons, such as "Economical Reasons," "Policy too extreme / too broad," and "Switzerland has little impact." The y-axis shows the frequency or number of responses associated with each reason.
+
+The chart provides valuable insights into the key objections and concerns raised by respondents regarding the Co2-Gesetz. "Economical Reasons" emerges as the most frequently cited rationale, followed by other factors like "Unfair Policy" and "Against Tax." Understanding these reasons is essential for policymakers and advocates seeking to address concerns and promote support for environmental policies.
